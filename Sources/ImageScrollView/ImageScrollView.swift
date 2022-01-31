@@ -27,8 +27,7 @@ public struct ImageScrollView: View {
                 .frame(width: proxy.size.width, height: proxy.size.height / 3)
                 .background (Color(.black).opacity(50).ignoresSafeArea())
             }
-        }.background (Color(.black).opacity(50).ignoresSafeArea())
-        .frame(maxWidth:.infinity,maxHeight: .infinity)
+        }
     }
 }
 
