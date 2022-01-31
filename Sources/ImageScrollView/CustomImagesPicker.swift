@@ -13,7 +13,7 @@ public struct CustomImagesPicker: View {
     @State var grid : [[Images]] = []
     @Binding var show : Bool
     @State var disabled = false
-    
+    var isIO = false
     public init(selecteds:Binding<[SelectedImages]>,show:Binding<Bool>){
         self._selected = selecteds
         self._show = show
