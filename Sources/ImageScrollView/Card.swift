@@ -8,12 +8,11 @@
 import SwiftUI
 import Photos
 
-struct Card : View {
+public struct Card : View {
     
     @State var data : Images
     @Binding var selected : [SelectedImages]
-    
-    var body: some View{
+    public var body: some View{
         
         ZStack{
             

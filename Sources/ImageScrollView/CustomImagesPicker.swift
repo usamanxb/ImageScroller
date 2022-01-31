@@ -7,14 +7,20 @@
 
 import SwiftUI
 import Photos
-struct CustomImagesPicker: View {
+public struct CustomImagesPicker: View {
     
     @Binding var selected : [SelectedImages]
     @State var grid : [[Images]] = []
     @Binding var show : Bool
     @State var disabled = false
     
-    var body: some View{
+    public init(selecteds:Binding<[SelectedImages]>,show:Binding<Bool>){
+        self._selected = selecteds
+        self._show = show
+        
+    }
+    
+    public var body: some View{
         
         GeometryReader{_ in
             

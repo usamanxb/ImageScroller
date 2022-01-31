@@ -7,15 +7,15 @@
 
 import SwiftUI
 import Photos
-struct Images: Hashable {
+public struct Images: Hashable {
     
-    var image : UIImage
-    var selected : Bool
-    var asset : PHAsset
+    public var image : UIImage
+    public var selected : Bool
+    public var asset : PHAsset
 }
 
-struct SelectedImages: Hashable{
+public struct SelectedImages: Hashable{
     
-    var asset : PHAsset
-    var image : UIImage
+    public var asset : PHAsset
+    public var image : UIImage
 }

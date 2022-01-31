@@ -8,16 +8,16 @@
 import SwiftUI
 import Photos
 
-struct Indicator : UIViewRepresentable {
+public struct Indicator : UIViewRepresentable {
     
-    func makeUIView(context: Context) -> UIActivityIndicatorView  {
+    public func makeUIView(context: Context) -> UIActivityIndicatorView  {
         
         let view = UIActivityIndicatorView(style: .large)
         view.startAnimating()
         return view
     }
     
-    func updateUIView(_ uiView:  UIActivityIndicatorView, context: Context) {
+    public func updateUIView(_ uiView:  UIActivityIndicatorView, context: Context) {
         
         
     }
