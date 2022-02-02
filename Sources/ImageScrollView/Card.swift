@@ -12,12 +12,18 @@ public struct Card : View {
     
     @State var data : Images
     @Binding var selected : [SelectedImages]
+    
+    public init(selected :Binding<[SelectedImages]>,data:Images){
+        self.data = data
+        self._selected = selected
+    }
     public var body: some View{
         
         ZStack{
             
             Image(uiImage: self.data.image)
                 .resizable()
+                .scaledToFit()
             
             if self.data.selected{
                 
@@ -38,8 +44,6 @@ public struct Card : View {
             
             
             if !self.data.selected{
-                
-                
                 self.data.selected = true
                 
                 // Extracting Orginal Size of Image from Asset
@@ -72,6 +76,5 @@ public struct Card : View {
                 }
             }
         }
-        
     }
 }

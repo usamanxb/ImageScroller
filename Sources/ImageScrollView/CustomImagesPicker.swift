@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Photos
+
 public struct CustomImagesPicker: View {
     
     @Binding var selected : [SelectedImages]
@@ -14,33 +15,26 @@ public struct CustomImagesPicker: View {
     @Binding var show : Bool
     @State var disabled = false
     var isIO = false
+    
     public init(selecteds:Binding<[SelectedImages]>,show:Binding<Bool>){
         self._selected = selecteds
         self._show = show
-        
     }
     
     public var body: some View{
         
         GeometryReader{_ in
-            
             VStack{
                 
-                
                 if !self.grid.isEmpty{
-                    
                     HStack{
-                        
                         Text("Pick a Image")
                             .fontWeight(.bold)
-                        
                         Spacer()
                     }
                     .padding(.leading)
                     .padding(.top)
-                    
                     ScrollView(.vertical, showsIndicators: false) {
-                        
                         VStack(spacing: 20){
                             
                             ForEach(self.grid,id: \.self){i in
@@ -49,7 +43,7 @@ public struct CustomImagesPicker: View {
                                     
                                     ForEach(i,id: \.self){j in
                                         
-                                        Card(data: j, selected: self.$selected)
+                                        Card(selected: self.$selected, data: j)
                                     }
                                 }
                             }
@@ -86,9 +80,12 @@ public struct CustomImagesPicker: View {
                     }
                 }
             }
-            .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height / 1.5)
+            .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height / 1.5,alignment: .center)
             .background(Color.white)
             .cornerRadius(12)
+            .shadow(radius: 2)
+            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.black, lineWidth: 0.1))
+            .padding()
         }
         .background(Color.white.opacity(100).edgesIgnoringSafeArea(.all)
                         .onTapGesture {
