@@ -6,9 +6,13 @@ Open your Xcode project
 
 Two options a and b for step 3
 a)   At the menu bar navigate to File / Swift Packages / Add Package Dependency
+
 b1) Select the project's root folder
+
 b2) select your app name under PROJECT
+
 b3) Open Swift Packages tab on the right side of Info and Build Settings
+
 b4) Hit the + button at the bottom of the list
 
 Here you should be prompted to "Choose Package Repository:"
