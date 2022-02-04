@@ -19,65 +19,45 @@ class UrlImageModel: ObservableObject {
     
     init(urlString: [String]) {
         self.urlString = urlString
+        downloadImages(urlString: urlString)
+    }
+
+    func downloadImages(urlString: [String]){
         DispatchQueue.global(qos: .background).async {
-            for a in self.urlString{
-                self.loadImage(url: a)
+            for urls in self.urlString{
+                self.imageUrl = urls
+                guard let url = URL(string: urls) else {return}
+                let task = URLSession.shared.dataTask(with: url, completionHandler: self.getImageFromResponse(data:response:error:))
+                task.resume()
             }
         }
     }
-
-    
-    func loadImage(url:String) {
-//        if loadImageFromCache(url: url) {
-//            print("Cache hit")
-//            return
-//        }
-//        
-//        print("Cache miss, loading from url")
-        loadImageFromUrl(url: url)
-    }
-    
-    func loadImageFromCache(url:String) -> Bool {
-//        guard let urlString = urlString else {
-//            return false
-//        }
-        
-        guard let cacheImage = imageCache.get(forKey: url) else {
-            return false
-        }
-        image.append(cacheImage)
-        //image = cacheImage
-        return true
-    }
-    
-    func loadImageFromUrl(url:String) {
-//        guard let urlString = urlString else {
-//            return
-//        }
-        self.imageUrl = url
-        let url = URL(string: url)!
-        let task = URLSession.shared.dataTask(with: url, completionHandler: getImageFromResponse(data:response:error:))
-        task.resume()
-    }
-    
     
     func getImageFromResponse(data: Data?, response: URLResponse?, error: Error?) {
         guard error == nil else {
             print("Error: \(error!)")
+            self.image.append(UIImage(systemName: "circle")!)
+            self.images = self.image.chunked(into: 3)
             return
         }
         guard let data = data else {
             print("No data found")
+            self.image.append(UIImage(systemName: "circle")!)
+            self.images = self.image.chunked(into: 3)
             return
         }
         
         DispatchQueue.main.async {
             guard let loadedImage = UIImage(data: data) else {
+                self.image.append(UIImage(systemName: "circle")!)
+                self.images = self.image.chunked(into: 3)
                 return
             }
             
+            if let url = response?.url?.absoluteString {
+                self.imageUrl = url
+            }
             self.imageCache.set(forKey: self.imageUrl, image: loadedImage)
-//            self.image = loadedImage
             self.downloadedImages.append(loadedImage)
             self.image.append(loadedImage)
             self.images = self.image.chunked(into: 3)
