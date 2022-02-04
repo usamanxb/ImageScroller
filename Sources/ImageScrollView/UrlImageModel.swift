@@ -46,7 +46,6 @@ class UrlImageModel: ObservableObject {
             self.images = self.image.chunked(into: 3)
             return
         }
-        
         DispatchQueue.main.async {
             guard let loadedImage = UIImage(data: data) else {
                 self.image.append(UIImage(systemName: "circle")!)

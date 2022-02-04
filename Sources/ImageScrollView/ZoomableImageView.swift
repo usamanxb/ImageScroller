@@ -30,20 +30,18 @@ public struct ZoomableImageView: View {
             .ignoresSafeArea()
             .overlay(
                 VStack{
-                    
-                    
                     ImageScrollView(images:selectedImages)
                         .onTapGesture {
                             print("sd")
                         }
                 }
-                .frame(maxWidth: .infinity, maxHeight: 667)
-                .ignoresSafeArea()
-                .background(Color.black)
-                .navigationBarBackButtonHidden(true)
-                .navigationBarItems(leading: btnBack)
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationViewStyle(StackNavigationViewStyle())
+                    .frame(maxWidth: .infinity, maxHeight: 667)
+                    .ignoresSafeArea()
+                    .background(Color.black)
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: btnBack)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationViewStyle(StackNavigationViewStyle())
             )
             .gesture(
                 DragGesture()
@@ -59,7 +57,6 @@ public struct ZoomableImageView: View {
                     }
             )
     }
-    
     var btnBack : some View { Button(action: {
         self.presentationMode.wrappedValue.dismiss()
     }) {
